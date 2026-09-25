@@ -142,6 +142,8 @@ public class DateTimeActivity extends BaseSetupWizardActivity {
     private static int getTimeZoneIndex(SimpleAdapter adapter, TimeZone tz) {
         final String defaultId = tz.getID();
         final int listSize = adapter.getCount();
+        final long now = System.currentTimeMillis();
+        int equivalentIndex = -1;
         for (int i = 0; i < listSize; i++) {
             final Map<?, ?> map = (Map<?, ?>) adapter.getItem(i);
             final String id = (String) map.get(KEY_ID);
@@ -149,8 +151,22 @@ public class DateTimeActivity extends BaseSetupWizardActivity {
                 // If current timezone is in this list, move focus to it
                 return i;
             }
+            if (equivalentIndex == -1 && isEquivalent(tz, TimeZone.getTimeZone(id), now)) {
+                equivalentIndex = i;
+            }
         }
-        return -1;
+        // The current timezone is not in the list (a fresh device reports "GMT"),
+        // so preselect an equivalent entry ("Etc/UTC") rather than letting the
+        // spinner fall back to its first entry, which would then get applied.
+        return equivalentIndex;
+    }
+
+    private static boolean isEquivalent(TimeZone a, TimeZone b, long now) {
+        // Not TimeZone#hasSameRules(): "GMT" is a SimpleTimeZone, which never
+        // matches the ZoneInfo instances used for the listed zones.
+        return a.getRawOffset() == b.getRawOffset()
+                && a.useDaylightTime() == b.useDaylightTime()
+                && a.getOffset(now) == b.getOffset(now);
     }
 
     private static void setDate(Context context, int year, int month, int day) {
