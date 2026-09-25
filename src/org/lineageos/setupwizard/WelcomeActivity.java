@@ -24,6 +24,7 @@ import android.view.View;
 import com.google.android.setupcompat.util.SystemBarHelper;
 
 import org.lineageos.setupwizard.util.EnableAccessibilityController;
+import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 public class WelcomeActivity extends BaseSetupWizardActivity {
 
@@ -40,8 +41,13 @@ public class WelcomeActivity extends BaseSetupWizardActivity {
         setNextText(R.string.start);
         setSkipText(R.string.emergency_call);
         findViewById(R.id.start).setOnClickListener(view -> onNextPressed());
-        findViewById(R.id.emerg_dialer)
-                .setOnClickListener(view -> startEmergencyDialer());
+        final View emergencyDialer = findViewById(R.id.emerg_dialer);
+        if (SetupWizardUtils.hasTelephony(this)) {
+            emergencyDialer.setOnClickListener(view -> startEmergencyDialer());
+        } else {
+            // Nothing to dial with on Wi-Fi only devices
+            emergencyDialer.setVisibility(View.GONE);
+        }
         findViewById(R.id.launch_accessibility)
                 .setOnClickListener(view -> startAccessibilitySettings());
         mEnableAccessibilityController =
