@@ -36,4 +36,9 @@
     <!-- Partner customization -->
     <color name="sud_glif_background_color_light">@color/white</color>
     <color name="sud_color_accent_glif_v3_light">@color/accent</color>
+    <!-- True black in dark mode -->
+    <color name="sud_glif_background_color_dark">#ff000000</color>
+    <!-- Same teal as the platform dark accent (material_deep_teal_200), reads
+         well on black and with the dark text of filled buttons -->
+    <color name="sud_color_accent_glif_v3_dark">#ff80cbc4</color>
 </resources>

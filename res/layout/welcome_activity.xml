@@ -63,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/ic_dialer"
+                android:drawableTint="?attr/colorAccent"
                 android:text="@string/emergency_call"
                 android:foreground="@drawable/focus_ring"
                 style="@style/SudGlifButton.Secondary" />
@@ -72,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/ic_eye"
+                android:drawableTint="?attr/colorAccent"
                 android:text="@string/accessibility_settings"
                 android:foreground="@drawable/focus_ring"
                 style="@style/SudGlifButton.Secondary" />
