@@ -18,24 +18,13 @@
 package org.lineageos.setupwizard;
 
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.TimePickerDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.DatePicker;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.android.settingslib.datetime.ZoneGetter;
 
@@ -48,8 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-public class DateTimeActivity extends BaseSetupWizardActivity implements
-        TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class DateTimeActivity extends BaseSetupWizardActivity {
 
     public static final String TAG = DateTimeActivity.class.getSimpleName();
 
@@ -62,17 +50,8 @@ public class DateTimeActivity extends BaseSetupWizardActivity implements
     private static final int HOURS_1 = 60 * 60000;
 
     private TimeZone mCurrentTimeZone;
-    private TextView mDateTextView;
-    private TextView mTimeTextView;
 
     private final Handler mHandler = new Handler();
-
-    private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            updateTimeAndDateDisplay();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +61,6 @@ public class DateTimeActivity extends BaseSetupWizardActivity implements
         final Spinner spinner = (Spinner) findViewById(R.id.timezone_list);
         final SimpleAdapter adapter = constructTimezoneAdapter(this);
         mCurrentTimeZone = TimeZone.getDefault();
-        View dateView = findViewById(R.id.date_item);
-        dateView.setOnClickListener((view) -> showDatePicker());
-        View timeView = findViewById(R.id.time_item);
-        timeView.setOnClickListener((view) -> showTimePicker());
-        mDateTextView = (TextView) findViewById(R.id.date_text);
-        mTimeTextView = (TextView) findViewById(R.id.time_text);
         // Pre-select current/default timezone
         mHandler.post(() -> {
             int tzIndex = getTimeZoneIndex(adapter, mCurrentTimeZone);
@@ -136,66 +109,18 @@ public class DateTimeActivity extends BaseSetupWizardActivity implements
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // Register for time ticks and other reasons for time change
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_TIME_TICK);
-        filter.addAction(Intent.ACTION_TIME_CHANGED);
-        filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-        registerReceiver(mIntentReceiver, filter, null, null);
-
-        updateTimeAndDateDisplay();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        unregisterReceiver(mIntentReceiver);
-    }
-
-    @Override
     protected int getLayoutResId() {
         return R.layout.setup_datetime_page;
     }
 
     @Override
     protected int getTitleResId() {
-        return R.string.setup_datetime;
+        return R.string.setup_timezone;
     }
 
     @Override
     protected int getIconResId() {
         return R.drawable.ic_datetime;
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int day) {
-        setDate(this, year, month, day);
-        updateTimeAndDateDisplay();
-    }
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        setTime(this, hourOfDay, minute);
-        updateTimeAndDateDisplay();
-    }
-
-    private void showDatePicker() {
-        DatePickerFragment datePickerFragment = DatePickerFragment.newInstance();
-        datePickerFragment.show(getFragmentManager(), DatePickerFragment.TAG);
-    }
-
-    private void showTimePicker() {
-        TimePickerFragment timePickerFragment = TimePickerFragment.newInstance();
-        timePickerFragment.show(getFragmentManager(), TimePickerFragment.TAG);
-    }
-
-    private void updateTimeAndDateDisplay() {
-        java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(this);
-        final Calendar now = Calendar.getInstance();
-        mTimeTextView.setText(DateFormat.getTimeFormat(this).format(now.getTime()));
-        mDateTextView.setText(shortDateFormat.format(now.getTime()));
     }
 
     private static SimpleAdapter constructTimezoneAdapter(Context context) {
@@ -241,20 +166,6 @@ public class DateTimeActivity extends BaseSetupWizardActivity implements
         }
     }
 
-    private static void setTime(Context context, int hourOfDay, int minute) {
-        Calendar c = Calendar.getInstance();
-
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(Calendar.MINUTE, minute);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        long when = c.getTimeInMillis();
-
-        if (when / 1000 < Integer.MAX_VALUE) {
-            ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).setTime(when);
-        }
-    }
-
     private static class TimeZoneComparator implements Comparator<Map<?, ?>> {
         private String mSortingKey;
 
@@ -285,60 +196,6 @@ public class DateTimeActivity extends BaseSetupWizardActivity implements
 
         private boolean isComparable(Object value) {
             return (value != null) && (value instanceof Comparable);
-        }
-    }
-
-    public static class TimePickerFragment extends DialogFragment
-            implements TimePickerDialog.OnTimeSetListener {
-
-        private static final String TAG = TimePickerFragment.class.getSimpleName();
-
-        public static TimePickerFragment newInstance() {
-            TimePickerFragment frag = new TimePickerFragment();
-            return frag;
-        }
-
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            ((DateTimeActivity) getActivity()).onTimeSet(view, hourOfDay, minute);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar calendar = Calendar.getInstance();
-            return new TimePickerDialog(
-                    getActivity(),
-                    this,
-                    calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE),
-                    DateFormat.is24HourFormat(getActivity()));
-        }
-    }
-
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
-
-        private static final String TAG = DatePickerFragment.class.getSimpleName();
-
-        public static DatePickerFragment newInstance() {
-            DatePickerFragment frag = new DatePickerFragment();
-            return frag;
-        }
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            ((DateTimeActivity) getActivity()).onDateSet(view, year, month, day);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar calendar = Calendar.getInstance();
-            return new DatePickerDialog(
-                    getActivity(),
-                    this,
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH));
         }
     }
 }

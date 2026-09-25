@@ -42,6 +42,7 @@
     <string name="setup_datetime">Date &amp; time</string>
     <string name="setup_current_date">Current date</string>
     <string name="setup_current_time">Current time</string>
+    <string name="setup_timezone">Time zone</string>
 
     <string name="sim_missing_summary" product="tablet">A SIM card has not been detected in your tablet. To insert a SIM card, read the instructions that came with your device.</string>
     <string name="sim_missing_summary" product="default">A SIM card has not been detected in your phone. To insert a SIM card, read the instructions that came with your device.</string>
@@ -49,6 +50,7 @@
     <string name="choose_data_sim_summary" product="default">Which SIM do you want to use for data? The selected SIM may incur network charges as it will be used to set up your phone.</string>
 
     <string name="date_time_summary">Set your time zone and adjust current date and time if needed</string>
+    <string name="timezone_summary">Select your time zone. Date and time are synced automatically once the device is connected to the internet.</string>
 
     <string name="backup_data_summary"><b>Back up</b> app data, Wi-Fi passwords, and other settings to Google servers</string>
 
