@@ -48,6 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/start"
+            android:focusedByDefault="true"
+            android:foreground="@drawable/focus_ring"
             style="@style/SudGlifButton.Primary" />
 
         <LinearLayout
@@ -62,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/ic_dialer"
                 android:text="@string/emergency_call"
+                android:foreground="@drawable/focus_ring"
                 style="@style/SudGlifButton.Secondary" />
 
             <Button
@@ -70,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/ic_eye"
                 android:text="@string/accessibility_settings"
+                android:foreground="@drawable/focus_ring"
                 style="@style/SudGlifButton.Secondary" />
 
         </LinearLayout>

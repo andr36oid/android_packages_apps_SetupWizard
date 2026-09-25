@@ -35,4 +35,6 @@
     <dimen name="carrier_text_margin_left">15dp</dimen>
     <dimen name="setup_line_spacing">3sp</dimen>
     <dimen name="min_locale_picker_height">100dp</dimen>
+    <dimen name="focus_ring_width">2dp</dimen>
+    <dimen name="focus_ring_radius">8dp</dimen>
 </resources>

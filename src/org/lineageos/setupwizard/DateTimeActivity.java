@@ -80,6 +80,12 @@ public class DateTimeActivity extends BaseSetupWizardActivity {
                                 (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                         alarm.setTimeZone(tzId);
                         mCurrentTimeZone = TimeZone.getTimeZone(tzId);
+                        // A zone was picked, so move focus on to Next: pressing
+                        // Enter again continues instead of reopening the list
+                        final NavigationLayout navigationBar = getNavigationBar();
+                        if (navigationBar != null) {
+                            navigationBar.getNextButton().requestFocus();
+                        }
                     }
 
                 }

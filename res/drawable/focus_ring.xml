@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- Outline drawn over the focused control (used as android:foreground), so
+     it is obvious where Enter / the A button goes on devices without a
+     touchscreen. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="@dimen/focus_ring_width"
+                android:color="?android:attr/textColorPrimary" />
+            <corners android:radius="@dimen/focus_ring_radius" />
+        </shape>
+    </item>
+</selector>
