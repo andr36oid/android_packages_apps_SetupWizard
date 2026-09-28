@@ -33,6 +33,8 @@ public class SetupWizardExitActivity extends BaseSetupWizardActivity {
 
     private static final String TAG = SetupWizardExitActivity.class.getSimpleName();
 
+    private static final String ACTION_TUTORIAL = "org.andr36oid.guide.action.TUTORIAL";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +44,29 @@ public class SetupWizardExitActivity extends BaseSetupWizardActivity {
         SetupWizardUtils.enableCaptivePortalDetection(this);
         PhoneMonitor.onSetupFinished();
         launchHome();
+        launchTutorial();
         finish();
         applyForwardTransition(TRANSITION_ID_FADE);
         Intent i = new Intent();
         i.setClassName(getPackageName(), SetupWizardExitService.class.getName());
         startService(i);
+    }
+
+    /**
+     * The last step: the console's hands-on tutorial (org.andr36oid.guide), on top of the home
+     * screen. It runs here rather than as a wizard page because it teaches FN (Home) and the
+     * notification shade, which the wizard keeps disabled while it runs.
+     */
+    private void launchTutorial() {
+        final Intent tutorial = new Intent(ACTION_TUTORIAL).addFlags(FLAG_ACTIVITY_NEW_TASK);
+        if (tutorial.resolveActivity(getPackageManager()) == null) {
+            return;
+        }
+        try {
+            startActivity(tutorial);
+        } catch (RuntimeException e) {
+            Log.w(TAG, "Couldn't open the tutorial", e);
+        }
     }
 
     private void launchHome() {
