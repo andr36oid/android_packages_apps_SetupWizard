@@ -33,6 +33,8 @@ public class SetupWizardExitActivity extends BaseSetupWizardActivity {
 
     private static final String TAG = SetupWizardExitActivity.class.getSimpleName();
 
+    private static final String ACTION_TUTORIAL = "org.andr36oid.guide.action.TUTORIAL";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +43,34 @@ public class SetupWizardExitActivity extends BaseSetupWizardActivity {
         }
         SetupWizardUtils.enableCaptivePortalDetection(this);
         PhoneMonitor.onSetupFinished();
-        launchHome();
+        if (!launchTutorial()) {
+            launchHome();
+        }
         finish();
         applyForwardTransition(TRANSITION_ID_FADE);
         Intent i = new Intent();
         i.setClassName(getPackageName(), SetupWizardExitService.class.getName());
         startService(i);
+    }
+
+    /**
+     * The console's hands-on tutorial (org.andr36oid.guide), instead of the home screen, so the
+     * home app's first start can't cover it. The home screen first opens at the tutorial's FN
+     * step. Not a wizard page: it teaches FN (Home) and the notification shade, which the
+     * wizard keeps disabled while it runs.
+     */
+    private boolean launchTutorial() {
+        final Intent tutorial = new Intent(ACTION_TUTORIAL).addFlags(FLAG_ACTIVITY_NEW_TASK);
+        if (tutorial.resolveActivity(getPackageManager()) == null) {
+            return false;
+        }
+        try {
+            startActivity(tutorial);
+            return true;
+        } catch (RuntimeException e) {
+            Log.w(TAG, "Couldn't open the tutorial", e);
+            return false;
+        }
     }
 
     private void launchHome() {
