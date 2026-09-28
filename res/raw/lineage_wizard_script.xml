@@ -19,17 +19,20 @@
 
 <!--
     GameConsole: controller-only, Wi-Fi only handheld without a touchscreen.
-    The only question asked on first boot is the time zone. Language, Wi-Fi,
-    location, LineageOS features (stats), recovery update, biometrics, screen
-    lock and restore are not shown; those settings keep their platform
-    defaults, which device/gameconsole/common sets to location off and stats
-    collection off.
+    The only questions asked on first boot are the language and the time
+    zone. Wi-Fi, location, LineageOS features (stats), recovery update,
+    biometrics, screen lock and restore are not shown; those settings keep
+    their platform defaults, which device/gameconsole/common sets to
+    location off and stats collection off.
 -->
 
 <WizardScript xmlns:wizard="http://schemas.android.com/apk/res/com.google.android.setupwizard"
     wizard:firstAction="welcome">
 
     <WizardAction wizard:uri="intent:#Intent;action=org.lineageos.setupwizard.LINEAGE_WELCOME;end" id="welcome">
+        <result wizard:action="locale" />
+    </WizardAction>
+    <WizardAction wizard:uri="intent:#Intent;action=org.lineageos.setupwizard.LINEAGE_LOCALE;end" id="locale">
         <result wizard:action="datetime" />
     </WizardAction>
 

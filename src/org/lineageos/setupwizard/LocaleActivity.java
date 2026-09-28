@@ -22,24 +22,28 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.NumberPicker;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.app.LocalePicker.LocaleInfo;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.util.LocaleUtils;
 
 import com.google.android.setupcompat.util.SystemBarHelper;
 
-import org.lineageos.setupwizard.widget.LocalePicker;
+import org.lineageos.setupwizard.util.SetupWizardUtils;
 
 import java.util.List;
 import java.util.Locale;
@@ -48,18 +52,22 @@ public class LocaleActivity extends BaseSetupWizardActivity {
 
     public static final String TAG = LocaleActivity.class.getSimpleName();
 
-    private ArrayAdapter<com.android.internal.app.LocalePicker.LocaleInfo> mLocaleAdapter;
+    private LocaleAdapter mLocaleAdapter;
     private Locale mCurrentLocale;
-    private int[] mAdapterIndices;
-    private LocalePicker mLanguagePicker;
+    private int mSelectedPosition = AdapterView.INVALID_POSITION;
+    private Spinner mLanguagePicker;
     private FetchUpdateSimLocaleTask mFetchUpdateSimLocaleTask;
     private final Handler mHandler = new Handler();
+    private boolean mHasTelephony;
     private boolean mPendingLocaleUpdate;
     private boolean mPaused = true;
 
     private final Runnable mUpdateLocale = new Runnable() {
         public void run() {
             if (mCurrentLocale != null) {
+                // Switching the system language restarts this page in the new
+                // language; Next has the focus again once it is back
+                focusNextButton();
                 mLanguagePicker.setEnabled(false);
                 com.android.internal.app.LocalePicker.updateLocale(mCurrentLocale);
             }
@@ -80,23 +88,40 @@ public class LocaleActivity extends BaseSetupWizardActivity {
         super.onCreate(savedInstanceState);
         SystemBarHelper.setBackButtonVisible(getWindow(), true);
         setNextText(R.string.next);
-        mLanguagePicker = (LocalePicker) findViewById(R.id.locale_list);
+        // Wi-Fi only devices have no SIM to suggest a language from
+        mHasTelephony = SetupWizardUtils.hasTelephony(this);
+        mLanguagePicker = (Spinner) findViewById(R.id.locale_list);
         loadLanguages();
+        final NavigationLayout navigationBar = getNavigationBar();
+        if (navigationBar != null) {
+            // Next sits bottom right, below the list: d-pad left reaches the
+            // list as well as up (right from the list is set in the layout)
+            navigationBar.getNextButton().setNextFocusLeftId(R.id.locale_list);
+        }
+        // Most people keep the preset language, so the page opens on Next and
+        // pressing A continues right away. navigation_layout already marks Next
+        // as focusedByDefault; this makes sure the language list never ends up
+        // with the initial focus.
+        mHandler.post(this::focusNextButton);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mPaused = true;
-        unregisterReceiver(mSimChangedReceiver);
+        if (mHasTelephony) {
+            unregisterReceiver(mSimChangedReceiver);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mPaused = false;
-        registerReceiver(mSimChangedReceiver,
-                new IntentFilter(TelephonyIntents.ACTION_SIM_STATE_CHANGED));
+        if (mHasTelephony) {
+            registerReceiver(mSimChangedReceiver,
+                    new IntentFilter(TelephonyIntents.ACTION_SIM_STATE_CHANGED));
+        }
         if (mLanguagePicker != null) {
             mLanguagePicker.setEnabled(true);
         }
@@ -121,60 +146,83 @@ public class LocaleActivity extends BaseSetupWizardActivity {
         return R.drawable.ic_locale;
     }
 
+    private void focusNextButton() {
+        final NavigationLayout navigationBar = getNavigationBar();
+        if (navigationBar != null) {
+            navigationBar.getNextButton().requestFocus();
+        }
+    }
+
     private void loadLanguages() {
-        mLocaleAdapter = com.android.internal.app.LocalePicker.constructAdapter(this,
-                R.layout.locale_picker_item, R.id.locale);
+        final boolean isInDeveloperMode = Settings.Global.getInt(getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+        mLocaleAdapter = new LocaleAdapter(this,
+                com.android.internal.app.LocalePicker.getAllAssetLocales(this,
+                        isInDeveloperMode));
         mCurrentLocale = Locale.getDefault();
         fetchAndUpdateSimLocale();
-        mAdapterIndices = new int[mLocaleAdapter.getCount()];
-        int currentLocaleIndex = 0;
-        String[] labels = new String[mLocaleAdapter.getCount()];
-        for (int i = 0; i < mAdapterIndices.length; i++) {
-            com.android.internal.app.LocalePicker.LocaleInfo localLocaleInfo =
-                    mLocaleAdapter.getItem(i);
-            Locale localLocale = localLocaleInfo.getLocale();
-            if (localLocale.equals(mCurrentLocale)) {
-                currentLocaleIndex = i;
-            }
-            mAdapterIndices[i] = i;
-            labels[i] = localLocaleInfo.getLabel();
-        }
-        mLanguagePicker.setDisplayedValues(labels);
-        mLanguagePicker.setMaxValue(labels.length - 1);
-        mLanguagePicker.setValue(currentLocaleIndex);
-        mLanguagePicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        mLanguagePicker.setOnValueChangedListener((pkr, oldVal, newVal) -> setLocaleFromPicker());
 
-        mLanguagePicker.setOnScrollListener((view, scrollState) -> {
-            if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                ((SetupWizardApp) getApplication()).setIgnoreSimLocale(true);
+        mSelectedPosition = getLocaleIndex(mCurrentLocale);
+        mLanguagePicker.setAdapter(mLocaleAdapter);
+        if (mSelectedPosition != AdapterView.INVALID_POSITION) {
+            mLanguagePicker.setSelection(mSelectedPosition, false);
+        } else {
+            // Current language not in the list: show the first entry, but only
+            // change the language once the user actually picks one
+            mSelectedPosition = 0;
+        }
+        mLanguagePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position,
+                    long id) {
+                // The spinner also reports the preselected row once it is laid
+                // out; only a different row is a choice made by the user
+                if (position == mSelectedPosition) {
+                    return;
+                }
+                mSelectedPosition = position;
+                setLocaleFromPicker(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
-    private void setLocaleFromPicker() {
+    private int getLocaleIndex(Locale locale) {
+        int languageMatch = AdapterView.INVALID_POSITION;
+        for (int i = 0; i < mLocaleAdapter.getCount(); i++) {
+            final Locale candidate = mLocaleAdapter.getItem(i).getLocale();
+            if (candidate.equals(locale)) {
+                return i;
+            }
+            if (languageMatch == AdapterView.INVALID_POSITION
+                    && candidate.getLanguage().equals(locale.getLanguage())) {
+                languageMatch = i;
+            }
+        }
+        return languageMatch;
+    }
+
+    private void setLocaleFromPicker(int position) {
         ((SetupWizardApp) getApplication()).setIgnoreSimLocale(true);
-        int i = mAdapterIndices[mLanguagePicker.getValue()];
-        final com.android.internal.app.LocalePicker.LocaleInfo localLocaleInfo =
-                mLocaleAdapter.getItem(i);
-        onLocaleChanged(localLocaleInfo.getLocale());
+        onLocaleChanged(mLocaleAdapter.getItem(position).getLocale());
     }
 
     private void onLocaleChanged(Locale paramLocale) {
-        mLanguagePicker.setEnabled(true);
-        Resources localResources = getResources();
-        Configuration localConfiguration1 = localResources.getConfiguration();
-        Configuration localConfiguration2 = new Configuration();
-        localConfiguration2.locale = paramLocale;
-        localResources.updateConfiguration(localConfiguration2, null);
-        localResources.updateConfiguration(localConfiguration1, null);
+        if (paramLocale.equals(mCurrentLocale)) {
+            return;
+        }
         mHandler.removeCallbacks(mUpdateLocale);
         mCurrentLocale = paramLocale;
-        mHandler.postDelayed(mUpdateLocale, 1000);
+        // Let the spinner's list close before the system switches language
+        mHandler.post(mUpdateLocale);
     }
 
     private void fetchAndUpdateSimLocale() {
-        if (((SetupWizardApp) getApplication()).ignoreSimLocale() || isDestroyed()) {
+        if (!mHasTelephony || ((SetupWizardApp) getApplication()).ignoreSimLocale()
+                || isDestroyed()) {
             return;
         }
         if (mPaused) {
@@ -242,4 +290,30 @@ public class LocaleActivity extends BaseSetupWizardActivity {
         }
     }
 
+    /**
+     * Language names, each drawn in its own locale so scripts such as Chinese and
+     * Japanese use the right glyphs, both in the spinner and in its list.
+     */
+    private static class LocaleAdapter extends ArrayAdapter<LocaleInfo> {
+
+        LocaleAdapter(Context context, List<LocaleInfo> locales) {
+            super(context, R.layout.locale_picker_item, R.id.locale, locales);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return bind(position, super.getView(position, convertView, parent));
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return bind(position, super.getDropDownView(position, convertView, parent));
+        }
+
+        private View bind(int position, View view) {
+            final TextView text = view.findViewById(R.id.locale);
+            text.setTextLocale(getItem(position).getLocale());
+            return view;
+        }
+    }
 }

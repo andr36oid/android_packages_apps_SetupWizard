@@ -15,6 +15,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<!-- GameConsole: the stock scrolling number picker is replaced by a spinner,
+     the same control as the time zone page. A opens the list, the d-pad moves
+     through it, A picks and B closes it. Next is focused when the page opens
+     (focusedByDefault in navigation_layout), so A on its own keeps the current
+     language and continues; d-pad up or left reaches the spinner. -->
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,28 +28,27 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         style="@style/SudContentFrame">
 
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/page"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:layout_weight="1">
 
-            <org.lineageos.setupwizard.widget.LocalePicker
+            <Spinner
                 android:id="@+id/locale_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                style="@style/LocaleWidget.Material.LocalePicker" />
+                android:layout_marginTop="24dp"
+                android:foreground="@drawable/focus_ring"
+                android:nextFocusRight="@id/navbar_next"
+                android:saveEnabled="false" />
 
-        </RelativeLayout>
+        </FrameLayout>
 
         <org.lineageos.setupwizard.NavigationLayout
             android:id="@+id/navigation_bar"
