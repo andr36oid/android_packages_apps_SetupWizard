@@ -56,13 +56,6 @@
     <protected-broadcast android:name="org.lineageos.setupwizard.SETUP_FINISHED"
                          android:permission="lineageos.permission.FINISH_SETUP"/>
 
-    <!-- The console's tutorial, opened when the wizard exits -->
-    <queries>
-        <intent>
-            <action android:name="org.andr36oid.guide.action.TUTORIAL" />
-        </intent>
-    </queries>
-
     <application android:label="@string/app_name"
                  android:icon="@mipmap/ic_launcher"
                  android:theme="@style/Theme.Setup"
