@@ -145,6 +145,20 @@
             </intent-filter>
         </activity>
 
+        <!-- andr36oid: "Choose your home screen", disabled (skipped) unless the build ships
+             both home screens -->
+        <activity android:name=".HomeChoiceActivity"
+                  android:label="@string/activity_label_empty"
+                  android:excludeFromRecents="true"
+                  android:configChanges="mcc|mnc"
+                  android:immersive="true"
+                  android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="org.lineageos.setupwizard.ANDR36OID_HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".WifiSetupActivity"
                   android:label="@string/activity_label_empty"
                   android:excludeFromRecents="true"

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="home_choice_title">Wybierz ekran główny</string>
+    <string name="home_choice_daijishou_description">Gry według konsoli, z okładkami</string>
+    <string name="home_choice_launcher_description">Prosta siatka aplikacji. Otwarte źródło.</string>
+    <string name="home_choice_remove">Usuń <xliff:g id="app">%1$s</xliff:g> z konsoli</string>
+    <string name="home_choice_later">Możesz to zmienić lub przywrócić usunięty w Ustawienia &gt; Aplikacje i powiadomienia &gt; Ekran główny.</string>
+</resources>

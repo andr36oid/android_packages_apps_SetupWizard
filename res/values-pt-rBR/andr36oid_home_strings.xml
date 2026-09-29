@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="home_choice_title">Escolha sua tela inicial</string>
+    <string name="home_choice_daijishou_description">Seus jogos organizados por console, com capas</string>
+    <string name="home_choice_launcher_description">Uma grade simples com seus apps. Código aberto.</string>
+    <string name="home_choice_remove">Remover o <xliff:g id="app">%1$s</xliff:g> do console</string>
+    <string name="home_choice_later">Você pode trocar, ou recuperar um que foi removido, em Configurações &gt; Apps e notificações &gt; Tela inicial.</string>
+</resources>

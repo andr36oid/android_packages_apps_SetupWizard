@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="home_choice_title">Choisissez votre écran d\'accueil</string>
+    <string name="home_choice_daijishou_description">Vos jeux classés par console, avec jaquettes</string>
+    <string name="home_choice_launcher_description">Une grille simple de vos applis. Open source.</string>
+    <string name="home_choice_remove">Supprimer <xliff:g id="app">%1$s</xliff:g> de la console</string>
+    <string name="home_choice_later">Vous pourrez en changer, ou récupérer celui supprimé, dans Paramètres &gt; Applis et notifications &gt; Écran d\'accueil.</string>
+</resources>
