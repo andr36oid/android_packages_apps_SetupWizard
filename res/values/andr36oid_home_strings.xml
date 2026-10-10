@@ -7,12 +7,12 @@
     <string name="home_choice_title">Choose your home screen</string>
     <!-- App names, the same in every language. The launcher's must match its app label. -->
     <string name="home_choice_daijishou_name" translatable="false">Daijishou</string>
-    <string name="home_choice_launcher_name" translatable="false">andr36oid launcher</string>
+    <string name="home_choice_launcher_name" translatable="false">Simple UI</string>
     <!-- Under Daijishou's picture. Two short lines at most. [CHAR LIMIT=60] -->
     <string name="home_choice_daijishou_description">Your games sorted by console, with box art</string>
     <!-- Under our launcher's picture. Two short lines at most. [CHAR LIMIT=60] -->
     <string name="home_choice_launcher_description">A simple grid of your apps. Open source.</string>
-    <!-- Check box. %1$s is the home screen that was not chosen (Daijishou or andr36oid launcher). [CHAR LIMIT=60] -->
+    <!-- Check box. %1$s is the home screen that was not chosen (Daijishou or Simple UI). [CHAR LIMIT=60] -->
     <string name="home_choice_remove">Remove <xliff:g id="app">%1$s</xliff:g> from the console</string>
     <!-- Below the check box. "Apps & notifications" is the Settings page name; "Home screen" is our page in it. [CHAR LIMIT=120] -->
     <string name="home_choice_later">You can switch, or get a removed one back, in Settings &gt; Apps &amp; notifications &gt; Home screen.</string>
