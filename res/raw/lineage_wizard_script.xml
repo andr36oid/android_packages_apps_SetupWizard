@@ -21,7 +21,7 @@
     GameConsole: controller-only, Wi-Fi only handheld without a touchscreen.
     The only questions asked on first boot are the language, the time
     zone and the home screen (andr36oid: only when the build ships two home
-    screens, else that page is skipped). Wi-Fi, location, LineageOS features (stats), recovery update,
+    screens, else that page is skipped), then the button tutorial. Wi-Fi, location, LineageOS features (stats), recovery update,
     biometrics, screen lock and restore are not shown; those settings keep
     their platform defaults, which device/gameconsole/common sets to
     location off and stats collection off.
@@ -42,6 +42,11 @@
     </WizardAction>
 
     <WizardAction wizard:uri="intent:#Intent;action=org.lineageos.setupwizard.ANDR36OID_HOME;end" id="home">
+        <result wizard:action="tutorial" />
+    </WizardAction>
+    <!-- andr36oid: the button tutorial (QuickStart, org.andr36oid.guide), run inside the
+         wizard so no other app can come in front of it. Skipped by builds without it. -->
+    <WizardAction wizard:uri="intent:#Intent;action=org.andr36oid.guide.action.SETUP_TUTORIAL;end" id="tutorial">
         <result wizard:action="finish" />
     </WizardAction>
 
