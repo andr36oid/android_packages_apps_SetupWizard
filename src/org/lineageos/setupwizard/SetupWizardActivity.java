@@ -24,6 +24,7 @@ import static org.lineageos.setupwizard.SetupWizardApp.EXTRA_SCRIPT_URI;
 import static org.lineageos.setupwizard.SetupWizardApp.LOGV;
 
 import android.annotation.Nullable;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,6 +49,8 @@ public class SetupWizardActivity extends BaseSetupWizardActivity {
         } else if (WizardManagerHelper.isUserSetupComplete(this)) {
             SetupWizardUtils.finishSetupWizard(this);
             finish();
+        } else if (resumeRunningSetup()) {
+            finish();
         } else {
             onSetupStart();
             SetupWizardUtils.enableComponent(this, WizardManager.class);
@@ -62,5 +65,36 @@ public class SetupWizardActivity extends BaseSetupWizardActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    /**
+     * andr36oid: this page is the home screen during the setup, so Android opens it again
+     * whenever something asks for home (apps installed and the home app switched by
+     * gameconsole-emu while the wizard runs). Starting the script again then threw the user
+     * back to the welcome page. If the wizard's pages are already open in another task,
+     * bring that task back instead.
+     */
+    private boolean resumeRunningSetup() {
+        if (!isTaskRoot()) {
+            // Opened on top of the wizard's own pages: closing this shows them again
+            Log.i(TAG, "Setup already running in this task");
+            return true;
+        }
+        try {
+            for (ActivityManager.AppTask task :
+                    getSystemService(ActivityManager.class).getAppTasks()) {
+                final ActivityManager.RecentTaskInfo info = task.getTaskInfo();
+                if (info.taskId != getTaskId() && info.numActivities > 0
+                        && info.topActivity != null) {
+                    Log.i(TAG, "Setup already running (" + info.topActivity.flattenToShortString()
+                            + "), going back to it");
+                    task.moveToFront();
+                    return true;
+                }
+            }
+        } catch (RuntimeException e) {
+            Log.w(TAG, "Couldn't look for a running setup", e);
+        }
+        return false;
     }
 }
