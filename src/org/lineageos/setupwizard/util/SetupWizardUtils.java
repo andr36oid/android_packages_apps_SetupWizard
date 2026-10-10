@@ -56,6 +56,7 @@ import org.lineageos.internal.util.PackageManagerUtils;
 import org.lineageos.setupwizard.BiometricActivity;
 import org.lineageos.setupwizard.BluetoothSetupActivity;
 import org.lineageos.setupwizard.ChooseDataSimActivity;
+import org.lineageos.setupwizard.HomeChoiceActivity;
 import org.lineageos.setupwizard.MobileDataActivity;
 import org.lineageos.setupwizard.SetupWizardApp;
 import org.lineageos.setupwizard.SimMissingActivity;
@@ -308,6 +309,10 @@ public class SetupWizardUtils {
         }
         if (!hasWifi(context) || isEthernetConnected(context)) {
             disableComponent(context, WifiSetupActivity.class);
+        }
+        // andr36oid: the home screen page only when there are two to choose from
+        if (!HomeChoice.isOffered(context)) {
+            disableComponent(context, HomeChoiceActivity.class);
         }
     }
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="home_choice_title">Pilih layar utama Anda</string>
+    <string name="home_choice_daijishou_description">Game Anda diurutkan per konsol, dengan sampul</string>
+    <string name="home_choice_launcher_description">Kisi aplikasi yang sederhana. Sumber terbuka.</string>
+    <string name="home_choice_remove">Hapus <xliff:g id="app">%1$s</xliff:g> dari konsol</string>
+    <string name="home_choice_later">Anda dapat menggantinya, atau mengembalikan yang dihapus, di Setelan &gt; Aplikasi &amp; notifikasi &gt; Layar utama.</string>
+</resources>

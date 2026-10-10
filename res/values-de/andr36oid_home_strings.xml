@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="home_choice_title">Startbildschirm wählen</string>
+    <string name="home_choice_daijishou_description">Deine Spiele nach Konsole sortiert, mit Covern</string>
+    <string name="home_choice_launcher_description">Ein einfaches Raster deiner Apps. Open Source.</string>
+    <string name="home_choice_remove"><xliff:g id="app">%1$s</xliff:g> von der Konsole entfernen</string>
+    <string name="home_choice_later">Wechseln oder einen entfernten zurückholen kannst du unter Einstellungen &gt; Apps &amp; Benachrichtigungen &gt; Startbildschirm.</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="home_choice_title">选择主屏幕</string>
+    <string name="home_choice_daijishou_description">按主机分类的游戏，带封面</string>
+    <string name="home_choice_launcher_description">简洁的应用网格。开源。</string>
+    <string name="home_choice_remove">从主机中移除“<xliff:g id="app">%1$s</xliff:g>”</string>
+    <string name="home_choice_later">之后可以在“设置 &gt; 应用和通知 &gt; 主屏幕”中切换，或恢复已移除的主屏幕。</string>
+</resources>
