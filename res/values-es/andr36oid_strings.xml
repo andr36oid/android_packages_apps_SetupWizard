@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="setup_timezone">Zona horaria</string>
+    <string name="timezone_summary">Selecciona tu zona horaria. La fecha y la hora se sincronizan automáticamente cuando el dispositivo se conecta a Internet.</string>
+</resources>
