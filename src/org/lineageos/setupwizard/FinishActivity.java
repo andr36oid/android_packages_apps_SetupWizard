@@ -41,6 +41,7 @@ import android.os.Handler;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.ImageView;
@@ -67,6 +68,9 @@ public class FinishActivity extends BaseSetupWizardActivity {
 
     private volatile boolean mIsFinishing = false;
 
+    // Settings.Global, set by QuickStart's SetupAddGamesActivity
+    private static final String SETTING_ADD_GAMES_SHUTDOWN = "andr36oid_setup_shutdown";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +82,13 @@ public class FinishActivity extends BaseSetupWizardActivity {
         mEnableAccessibilityController =
                 EnableAccessibilityController.getInstance(getApplicationContext());
         setNextText(R.string.start);
+        // andr36oid: "Shut down now" on the add games page (QuickStart
+        // SetupAddGamesActivity): finish without waiting for Start, the guide then powers
+        // off once Daijishou is home
+        if (savedInstanceState == null && Settings.Global.getInt(getContentResolver(),
+                SETTING_ADD_GAMES_SHUTDOWN, 0) == 1) {
+            mReveal.post(this::onNavigateNext);
+        }
     }
 
     @Override
