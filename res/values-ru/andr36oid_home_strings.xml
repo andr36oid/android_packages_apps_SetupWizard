@@ -4,8 +4,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="home_choice_title">Выберите главный экран</string>
-    <string name="home_choice_daijishou_description">Игры по консолям, с обложками</string>
-    <string name="home_choice_launcher_description">Простая сетка приложений. Открытый код.</string>
+    <string name="home_choice_daijishou_description">Больше похоже на Android-консоль.\nИгры по консолям, с обложками</string>
+    <string name="home_choice_launcher_description">Больше похоже на Android TV.\nПростая сетка приложений. Открытый код.</string>
     <string name="home_choice_remove">Удалить «<xliff:g id="app">%1$s</xliff:g>» с консоли</string>
     <string name="home_choice_later">Сменить его или вернуть удалённый можно в меню Настройки &gt; Приложения и уведомления &gt; Главный экран.</string>
 </resources>

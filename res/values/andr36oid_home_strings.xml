@@ -9,9 +9,9 @@
     <string name="home_choice_daijishou_name" translatable="false">Daijishou</string>
     <string name="home_choice_launcher_name" translatable="false">Simple UI</string>
     <!-- Under Daijishou's picture. Two short lines at most. [CHAR LIMIT=60] -->
-    <string name="home_choice_daijishou_description">Your games sorted by console, with box art</string>
+    <string name="home_choice_daijishou_description">Feels more like an Android console.\nYour games sorted by console, with box art</string>
     <!-- Under our launcher's picture. Two short lines at most. [CHAR LIMIT=60] -->
-    <string name="home_choice_launcher_description">A simple grid of your apps. Open source.</string>
+    <string name="home_choice_launcher_description">Feels more like Android TV.\nA simple grid of your apps. Open source.</string>
     <!-- Check box. %1$s is the home screen that was not chosen (Daijishou or Simple UI). [CHAR LIMIT=60] -->
     <string name="home_choice_remove">Remove <xliff:g id="app">%1$s</xliff:g> from the console</string>
     <!-- Below the check box. "Apps & notifications" is the Settings page name; "Home screen" is our page in it. [CHAR LIMIT=120] -->
