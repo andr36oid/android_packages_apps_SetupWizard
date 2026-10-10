@@ -84,9 +84,9 @@ public class FinishActivity extends BaseSetupWizardActivity {
         setNextText(R.string.start);
         // andr36oid: "Shut down now" on the add games page (QuickStart
         // SetupAddGamesActivity): finish without waiting for Start, the guide then powers
-        // off once Daijishou is home
+        // off right away. The setting holds the boot count it was chosen in, 0 is off.
         if (savedInstanceState == null && Settings.Global.getInt(getContentResolver(),
-                SETTING_ADD_GAMES_SHUTDOWN, 0) == 1) {
+                SETTING_ADD_GAMES_SHUTDOWN, 0) != 0) {
             mReveal.post(this::onNavigateNext);
         }
     }

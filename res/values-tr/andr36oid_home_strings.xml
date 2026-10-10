@@ -4,8 +4,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="home_choice_title">Ana ekranınızı seçin</string>
-    <string name="home_choice_daijishou_description">Oyunlarınız konsola göre, kapak resimleriyle</string>
-    <string name="home_choice_launcher_description">Uygulamalarınız için basit bir ızgara. Açık kaynak.</string>
+    <string name="home_choice_daijishou_description">Daha çok bir Android konsolu gibi.\nOyunlarınız konsola göre, kapak resimleriyle</string>
+    <string name="home_choice_launcher_description">Daha çok Android TV gibi.\nUygulamalarınız için basit bir ızgara. Açık kaynak.</string>
     <string name="home_choice_remove"><xliff:g id="app">%1$s</xliff:g> uygulamasını konsoldan kaldır</string>
     <string name="home_choice_later">Bunu değiştirebilir veya kaldırılanı geri alabilirsiniz: Ayarlar &gt; Uygulama ve bildirimler &gt; Ana ekran.</string>
 </resources>
