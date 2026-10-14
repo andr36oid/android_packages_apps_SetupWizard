@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="1"
-            android:src="@drawable/logo"
+            android:src="@drawable/andr36oid_logo"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:gravity="center"
@@ -48,6 +48,19 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
+    <!-- andr36oid: LineageOS credited small in the lower left corner, left of Next -->
+    <ImageView
+        android:id="@+id/based_on"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/andr36oid_based_on_height"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="@dimen/content_margin_left"
+        android:layout_marginBottom="@dimen/andr36oid_based_on_margin_bottom"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        android:src="@drawable/based_on_lineageos"
+        android:contentDescription="@string/andr36oid_based_on_lineageos" />
 
     <ImageView
         android:id="@+id/reveal"
