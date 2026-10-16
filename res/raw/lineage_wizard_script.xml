@@ -44,6 +44,11 @@
     </WizardAction>
 
     <WizardAction wizard:uri="intent:#Intent;action=org.lineageos.setupwizard.ANDR36OID_HOME;end" id="home">
+        <result wizard:action="apps" />
+    </WizardAction>
+    <!-- andr36oid: which of the bundled apps to install, from the card, no internet needed
+         (QuickStart, org.andr36oid.guide). Skipped by builds without it. -->
+    <WizardAction wizard:uri="intent:#Intent;action=org.andr36oid.guide.action.SETUP_APPS;end" id="apps">
         <result wizard:action="tutorial" />
     </WizardAction>
     <!-- andr36oid: the button tutorial (QuickStart, org.andr36oid.guide), run inside the
