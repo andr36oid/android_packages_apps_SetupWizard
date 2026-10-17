@@ -4,8 +4,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="home_choice_title">Choisissez votre écran d\'accueil</string>
-    <string name="home_choice_daijishou_description">Ressemble davantage à une console Android.\nVos jeux classés par console, avec jaquettes</string>
-    <string name="home_choice_launcher_description">Ressemble davantage à Android TV.\nUne grille simple de vos applis. Open source.</string>
+    <string name="home_choice_daijishou_description">Style console Android.\nJeux par console, avec jaquettes</string>
+    <string name="home_choice_launcher_description">Style Android TV.\nGrille d’applis. Logiciel libre.</string>
     <string name="home_choice_remove">Supprimer <xliff:g id="app">%1$s</xliff:g> de la console</string>
     <string name="home_choice_later">Vous pourrez en changer, ou récupérer celui supprimé, dans Paramètres &gt; Applis et notifications &gt; Écran d\'accueil.</string>
 </resources>

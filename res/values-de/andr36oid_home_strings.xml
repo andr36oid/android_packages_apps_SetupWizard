@@ -4,8 +4,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="home_choice_title">Startbildschirm wählen</string>
-    <string name="home_choice_daijishou_description">Fühlt sich eher wie eine Android-Konsole an.\nDeine Spiele nach Konsole sortiert, mit Covern</string>
-    <string name="home_choice_launcher_description">Fühlt sich eher wie Android TV an.\nEin einfaches Raster deiner Apps. Open Source.</string>
+    <string name="home_choice_daijishou_description">Wie eine Android-Konsole.\nSpiele nach System, mit Covern</string>
+    <string name="home_choice_launcher_description">Wie Android TV.\nApp-Raster, Open Source.</string>
     <string name="home_choice_remove"><xliff:g id="app">%1$s</xliff:g> von der Konsole entfernen</string>
     <string name="home_choice_later">Wechseln oder einen entfernten zurückholen kannst du unter Einstellungen &gt; Apps &amp; Benachrichtigungen &gt; Startbildschirm.</string>
 </resources>

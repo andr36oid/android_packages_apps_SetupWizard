@@ -4,8 +4,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="home_choice_title">Elige tu pantalla de inicio</string>
-    <string name="home_choice_daijishou_description">Se siente más como una consola Android.\nTus juegos ordenados por consola, con carátulas</string>
-    <string name="home_choice_launcher_description">Se siente más como Android TV.\nUna cuadrícula sencilla de tus apps. Código abierto.</string>
+    <string name="home_choice_daijishou_description">Como una consola Android.\nJuegos por consola, con carátulas</string>
+    <string name="home_choice_launcher_description">Como Android TV.\nApps en cuadrícula. Código abierto.</string>
     <string name="home_choice_remove">Quitar <xliff:g id="app">%1$s</xliff:g> de la consola</string>
     <string name="home_choice_later">Puedes cambiarla, o recuperar la que quitaste, en Ajustes &gt; Aplicaciones y notificaciones &gt; Pantalla de inicio.</string>
 </resources>
