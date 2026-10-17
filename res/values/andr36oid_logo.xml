@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- "Based on LineageOS" in the lower left of the first and last setup screen -->
-    <dimen name="andr36oid_based_on_height">26dp</dimen>
-    <dimen name="andr36oid_based_on_margin_bottom">20dp</dimen>
+    <dimen name="andr36oid_based_on_height">39dp</dimen>
+    <dimen name="andr36oid_based_on_margin_bottom">14dp</dimen>
     <string name="andr36oid_based_on_lineageos" translatable="false">Based on LineageOS</string>
 </resources>
