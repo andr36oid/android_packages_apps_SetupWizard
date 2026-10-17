@@ -41,6 +41,7 @@
 
             <Spinner
                 android:id="@+id/locale_list"
+                android:popupBackground="?android:attr/colorBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

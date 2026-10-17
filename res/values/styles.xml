@@ -16,12 +16,8 @@
      limitations under the License.
 -->
 <resources>
-    <!-- Follow the system dark theme. Dark mode uses a pure black background
-         (sud_glif_background_color_dark); the window background is set to it
-         as well so the finish page and transitions are black too, not grey. -->
-    <style name="Theme.Setup" parent="SudThemeGlifV3.DayNight">
-        <item name="android:windowBackground">?android:attr/colorBackground</item>
-    </style>
+    <!-- Shared with the tutorial, bundled-app picker and button checks. -->
+    <style name="Theme.Setup" parent="Andr36oidSetupTheme" />
 
     <style name="SpinnerItem">
         <item name="android:textSize">15sp</item>
