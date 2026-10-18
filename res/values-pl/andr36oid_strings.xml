@@ -3,4 +3,6 @@
     <string name="setup_timezone">Strefa czasowa</string>
     <string name="timezone_summary">Wybierz strefę czasową. Data i godzina ustawią się automatycznie po połączeniu urządzenia z internetem.</string>
     <string name="andr36oid_credits">Twórcy</string>
+    <string name="andr36oid_free_title">andr36oid jest darmowy</string>
+    <string name="andr36oid_free_body">To darmowe oprogramowanie open source i nikt nie może pobierać za nie opłat. Jeśli zapłaciłeś za sam andr36oid, zostałeś oszukany: zażądaj zwrotu pieniędzy od sprzedawcy.</string>
 </resources>

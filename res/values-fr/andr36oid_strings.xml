@@ -3,4 +3,6 @@
     <string name="setup_timezone">Fuseau horaire</string>
     <string name="timezone_summary">Sélectionnez votre fuseau horaire. La date et l\'heure se synchronisent automatiquement une fois l\'appareil connecté à Internet.</string>
     <string name="andr36oid_credits">Crédits</string>
+    <string name="andr36oid_free_title">andr36oid est gratuit</string>
+    <string name="andr36oid_free_body">C\'est un logiciel libre et open source, et personne n\'a le droit de vous le faire payer. Si vous avez payé andr36oid lui-même, vous vous êtes fait arnaquer : demandez au vendeur de vous rembourser.</string>
 </resources>

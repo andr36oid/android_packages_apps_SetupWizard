@@ -3,4 +3,6 @@
     <string name="setup_timezone">Saat dilimi</string>
     <string name="timezone_summary">Saat diliminizi seçin. Cihaz internete bağlandığında tarih ve saat otomatik olarak eşitlenir.</string>
     <string name="andr36oid_credits">Emeği geçenler</string>
+    <string name="andr36oid_free_title">andr36oid ücretsiz</string>
+    <string name="andr36oid_free_body">Bu, ücretsiz ve açık kaynaklı bir yazılımdır; hiç kimse bunun için sizden ücret alamaz. andr36oid\'in kendisi için para ödediyseniz dolandırılmışsınız: satıcıdan paranızı geri isteyin.</string>
 </resources>

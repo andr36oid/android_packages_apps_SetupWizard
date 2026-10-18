@@ -3,4 +3,6 @@
     <string name="setup_timezone">Zona waktu</string>
     <string name="timezone_summary">Pilih zona waktu Anda. Tanggal dan waktu disinkronkan otomatis setelah perangkat terhubung ke internet.</string>
     <string name="andr36oid_credits">Kredit</string>
+    <string name="andr36oid_free_title">andr36oid itu gratis</string>
+    <string name="andr36oid_free_body">Ini adalah perangkat lunak gratis dan open-source, dan tidak ada yang boleh memungut biaya dari Anda untuknya. Jika Anda membayar andr36oid itu sendiri, Anda telah ditipu: minta uang Anda kembali dari penjual.</string>
 </resources>

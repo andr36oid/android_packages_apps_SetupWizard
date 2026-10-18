@@ -3,4 +3,6 @@
     <string name="setup_timezone">Fuso horário</string>
     <string name="timezone_summary">Selecione o seu fuso horário. A data e a hora são sincronizadas automaticamente quando o dispositivo se liga à Internet.</string>
     <string name="andr36oid_credits">Créditos</string>
+    <string name="andr36oid_free_title">O andr36oid é gratuito</string>
+    <string name="andr36oid_free_body">É um software gratuito e de código aberto, e ninguém tem o direito de lhe cobrar por ele. Se pagou pelo próprio andr36oid, foi enganado: exija o seu dinheiro de volta ao vendedor.</string>
 </resources>

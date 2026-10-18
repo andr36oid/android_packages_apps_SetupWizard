@@ -3,4 +3,6 @@
     <string name="setup_timezone">Zeitzone</string>
     <string name="timezone_summary">Wähle deine Zeitzone. Datum und Uhrzeit stellen sich automatisch, sobald die Konsole mit dem Internet verbunden ist.</string>
     <string name="andr36oid_credits">Credits</string>
+    <string name="andr36oid_free_title">andr36oid ist kostenlos</string>
+    <string name="andr36oid_free_body">Es ist kostenlose Open-Source-Software, und niemand darf dir dafür Geld abverlangen. Wenn du für andr36oid selbst bezahlt hast, wurdest du betrogen: Verlange dein Geld vom Verkäufer zurück.</string>
 </resources>
