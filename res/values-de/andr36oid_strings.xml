@@ -2,4 +2,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="setup_timezone">Zeitzone</string>
     <string name="timezone_summary">Wähle deine Zeitzone. Datum und Uhrzeit stellen sich automatisch, sobald die Konsole mit dem Internet verbunden ist.</string>
+    <string name="andr36oid_credits">Credits</string>
 </resources>

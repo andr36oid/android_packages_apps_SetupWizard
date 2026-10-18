@@ -2,4 +2,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="setup_timezone">Strefa czasowa</string>
     <string name="timezone_summary">Wybierz strefę czasową. Data i godzina ustawią się automatycznie po połączeniu urządzenia z internetem.</string>
+    <string name="andr36oid_credits">Twórcy</string>
 </resources>

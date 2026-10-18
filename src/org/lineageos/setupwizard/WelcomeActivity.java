@@ -17,6 +17,8 @@
 
 package org.lineageos.setupwizard;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,6 +49,21 @@ public class WelcomeActivity extends BaseSetupWizardActivity {
         } else {
             // Nothing to dial with on Wi-Fi only devices
             emergencyDialer.setVisibility(View.GONE);
+        }
+        // andr36oid: the same credits screen Settings opens; hidden if the app is missing
+        final Intent creditsIntent = new Intent().setClassName(
+                "org.andr36oid.credits", "org.andr36oid.credits.CreditsActivity");
+        final View credits = findViewById(R.id.credits);
+        if (getPackageManager().resolveActivity(creditsIntent, 0) != null) {
+            credits.setOnClickListener(view -> {
+                try {
+                    startActivity(creditsIntent);
+                } catch (ActivityNotFoundException | SecurityException e) {
+                    view.setVisibility(View.GONE);
+                }
+            });
+        } else {
+            credits.setVisibility(View.GONE);
         }
         findViewById(R.id.launch_accessibility)
                 .setOnClickListener(view -> startAccessibilitySettings());

@@ -56,6 +56,10 @@
     <protected-broadcast android:name="org.lineageos.setupwizard.SETUP_FINISHED"
                          android:permission="lineageos.permission.FINISH_SETUP"/>
 
+    <queries>
+        <package android:name="org.andr36oid.credits" />
+    </queries>
+
     <application android:label="@string/app_name"
                  android:icon="@mipmap/ic_launcher"
                  android:theme="@style/Theme.Setup"

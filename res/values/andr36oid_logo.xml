@@ -4,4 +4,5 @@
     <dimen name="andr36oid_based_on_height">39dp</dimen>
     <dimen name="andr36oid_based_on_margin_bottom">14dp</dimen>
     <string name="andr36oid_based_on_lineageos" translatable="false">Based on LineageOS</string>
+    <string name="andr36oid_credits">Credits</string>
 </resources>

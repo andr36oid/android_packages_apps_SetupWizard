@@ -2,4 +2,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="setup_timezone">Fuseau horaire</string>
     <string name="timezone_summary">Sélectionnez votre fuseau horaire. La date et l\'heure se synchronisent automatiquement une fois l\'appareil connecté à Internet.</string>
+    <string name="andr36oid_credits">Crédits</string>
 </resources>

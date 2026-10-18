@@ -2,4 +2,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="setup_timezone">Fuso horário</string>
     <string name="timezone_summary">Selecione o seu fuso horário. A data e a hora são sincronizadas automaticamente quando o dispositivo se liga à Internet.</string>
+    <string name="andr36oid_credits">Créditos</string>
 </resources>
