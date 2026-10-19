@@ -43,7 +43,11 @@ public class SetupWizardActivity extends BaseSetupWizardActivity {
         if (LOGV) {
             Log.v(TAG, "onCreate savedInstanceState=" + savedInstanceState);
         }
-        if (SetupWizardUtils.hasGMS(this)) {
+        if (FinishActivity.sFinishing) {
+            // andr36oid: the last page is finishing the setup itself
+            Log.i(TAG, "Setup is finishing, not starting it again");
+            finish();
+        } else if (SetupWizardUtils.hasGMS(this)) {
             SetupWizardUtils.disableHome(this);
             finish();
         } else if (WizardManagerHelper.isUserSetupComplete(this)) {

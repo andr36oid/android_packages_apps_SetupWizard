@@ -117,7 +117,21 @@ public class FinishActivity extends BaseSetupWizardActivity {
         }
     }
 
+    /**
+     * andr36oid: the setup is on its way out. Closing the wizard's tasks brings up the home
+     * screen, which is still our SetupWizardActivity until the wizard is done, and with the
+     * system busy (the setup service's app pass) that started the whole setup again.
+     * SetupWizardActivity just closes while this is set.
+     */
+    static volatile boolean sFinishing;
+
     private void startFinishSequence() {
+        sFinishing = true;
+        // andr36oid: complete from here on, not only once the animation is over and the
+        // wizard's last step ran: a SetupWizardActivity started meanwhile (or after this
+        // process died) sees it and finishes the wizard instead of starting it over
+        Settings.Global.putInt(getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 1);
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.USER_SETUP_COMPLETE, 1);
         Intent i = new Intent(ACTION_SETUP_COMPLETE);
         i.setPackage(getPackageName());
         sendBroadcastAsUser(i, getCallingUserHandle(), FINISH_SETUP);
@@ -194,12 +208,6 @@ public class FinishActivity extends BaseSetupWizardActivity {
         final WallpaperManager wallpaperManager =
                 WallpaperManager.getInstance(mSetupWizardApp);
         wallpaperManager.forgetLoadedWallpaper();
-        // andr36oid: setup counts as complete before the tasks go. Closing them brings
-        // up the home screen, which is still our SetupWizardActivity until the wizard is
-        // done; while the setup was installing apps the system was slow enough for it to
-        // start the whole setup again. Marked complete, it finishes the wizard instead.
-        Settings.Global.putInt(getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 1);
-        Settings.Secure.putInt(getContentResolver(), Settings.Secure.USER_SETUP_COMPLETE, 1);
         finishAllAppTasks();
         SetupWizardUtils.enableStatusBar(this);
         Intent intent = WizardManagerHelper.getNextIntent(getIntent(),
