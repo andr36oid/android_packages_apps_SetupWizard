@@ -40,7 +40,6 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:accessibilityHeading="true" />
 
-                <!-- both cards as tall as the taller one (LinearLayout evens out match_parent) -->
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
