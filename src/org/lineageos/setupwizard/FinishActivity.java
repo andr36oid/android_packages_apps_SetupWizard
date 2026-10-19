@@ -194,6 +194,12 @@ public class FinishActivity extends BaseSetupWizardActivity {
         final WallpaperManager wallpaperManager =
                 WallpaperManager.getInstance(mSetupWizardApp);
         wallpaperManager.forgetLoadedWallpaper();
+        // andr36oid: setup counts as complete before the tasks go. Closing them brings
+        // up the home screen, which is still our SetupWizardActivity until the wizard is
+        // done; while the setup was installing apps the system was slow enough for it to
+        // start the whole setup again. Marked complete, it finishes the wizard instead.
+        Settings.Global.putInt(getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 1);
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.USER_SETUP_COMPLETE, 1);
         finishAllAppTasks();
         SetupWizardUtils.enableStatusBar(this);
         Intent intent = WizardManagerHelper.getNextIntent(getIntent(),
