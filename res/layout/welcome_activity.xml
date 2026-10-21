@@ -115,8 +115,8 @@
             <ImageView
                 android:id="@+id/credits_icon"
                 android:focusable="false"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginEnd="6dp"
                 android:importantForAccessibility="no"
                 android:src="@drawable/ic_andr36oid_version" />
