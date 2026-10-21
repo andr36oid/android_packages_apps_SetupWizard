@@ -102,16 +102,29 @@
         <!-- andr36oid: opens the credits; small secondary button in the lowest right
              corner, clear of the centred emergency/accessibility row; hidden when the
              app is missing -->
-        <Button
-            android:id="@+id/credits"
+        <LinearLayout
+            android:id="@+id/credits_row"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/content_margin_left"
             android:layout_marginBottom="@dimen/andr36oid_based_on_margin_bottom"
-            android:nextFocusUp="@id/start"
-            android:text="@string/andr36oid_credits"
-            android:foreground="@drawable/focus_ring"
-            style="@style/SudGlifButton.Secondary" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="6dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_andr36oid_version" />
+            <Button
+                android:id="@+id/credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:nextFocusUp="@id/start"
+                android:text="@string/andr36oid_credits"
+                android:foreground="@drawable/focus_ring"
+                style="@style/SudGlifButton.Secondary" />
+        </LinearLayout>
     </FrameLayout>
 </com.google.android.setupdesign.GlifLayout>

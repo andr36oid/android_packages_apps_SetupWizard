@@ -63,7 +63,7 @@ public class WelcomeActivity extends BaseSetupWizardActivity {
                 }
             });
         } else {
-            credits.setVisibility(View.GONE);
+            findViewById(R.id.credits_row).setVisibility(View.GONE);
         }
         findViewById(R.id.launch_accessibility)
                 .setOnClickListener(view -> startAccessibilitySettings());
