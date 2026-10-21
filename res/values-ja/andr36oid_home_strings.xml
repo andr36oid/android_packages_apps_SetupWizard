@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="home_choice_daijishou_description">Android 端末のような見た目です。\nゲームを機種ごとに並べ、ボックスアートを表示します</string>
+    <string name="home_choice_later">切り替えや、削除したホーム画面の復元は、設定 &gt; アプリと通知 &gt; ホーム画面 で行えます。</string>
+    <string name="home_choice_launcher_description">Android TV のような見た目です。\nアプリを並べたシンプルなグリッド。オープンソースです。</string>
+    <string name="home_choice_remove"><xliff:g id="app">%1$s</xliff:g> を本体から削除</string>
+    <string name="home_choice_title">ホーム画面を選択</string>
+</resources>

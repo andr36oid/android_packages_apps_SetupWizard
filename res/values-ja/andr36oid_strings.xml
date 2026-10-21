@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andr36oid_credits">クレジット</string>
+    <string name="andr36oid_free_body">andr36oid は無料のオープンソースソフトウェアです。誰もこれに料金を請求することはできません。andr36oid 自体に代金を払った場合は、だまされています。販売者に返金を求めてください。</string>
+    <string name="andr36oid_free_title">andr36oid は無料です</string>
+    <string name="setup_timezone">タイムゾーン</string>
+    <string name="timezone_summary">タイムゾーンを選択してください。本体がインターネットに接続されると、日付と時刻が自動的に合わせられます。</string>
+</resources>
