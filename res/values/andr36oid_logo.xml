@@ -5,6 +5,15 @@
     <dimen name="andr36oid_based_on_margin_bottom">14dp</dimen>
     <string name="andr36oid_based_on_lineageos" translatable="false">Based on LineageOS</string>
     <string name="andr36oid_credits">Credits</string>
+    <!-- What the icon left of Credits says when clicked with the mouse, in this order; it
+         leaves after the last one. Quotes, kept in English. -->
+    <string-array name="andr36oid_icon_lines" translatable="false">
+        <item>I\'ll be watching you ...</item>
+        <item>Oh, it\'s you, Pine Tree. Stop bothering me.</item>
+        <item>Don\'t you have something better to do?</item>
+        <item>Just play with the thing already</item>
+        <item>Reality is an illusion, the universe is a hologram, buy gold byeeeee!!!</item>
+    </string-array>
     <!-- Last setup page, between the logo and Start -->
     <string name="andr36oid_free_title">andr36oid is free</string>
     <string name="andr36oid_free_body">It is free, open-source software, and nobody may charge you for it. If you paid for andr36oid itself, you were scammed: ask the seller for your money back.</string>

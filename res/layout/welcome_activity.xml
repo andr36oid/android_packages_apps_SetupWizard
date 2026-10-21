@@ -111,7 +111,10 @@
             android:layout_marginBottom="@dimen/andr36oid_based_on_margin_bottom"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+            <!-- only the mouse reaches it: not focusable, so the D-pad skips it -->
             <ImageView
+                android:id="@+id/credits_icon"
+                android:focusable="false"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginEnd="6dp"
