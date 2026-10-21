@@ -32,6 +32,7 @@ android_app {
 
     static_libs: [
         "//device/gameconsole/common:andr36oid-setup-theme",
+        "//device/gameconsole/common:andr36oid-hint-bar",
         "androidx.core_core",
         "SettingsLib",
         "setupcompat",

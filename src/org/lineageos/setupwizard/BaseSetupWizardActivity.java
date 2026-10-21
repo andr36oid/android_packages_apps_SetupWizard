@@ -63,6 +63,8 @@ import com.google.android.setupdesign.GlifLayout;
 import org.lineageos.setupwizard.NavigationLayout.NavigationBarListener;
 import org.lineageos.setupwizard.util.SetupWizardUtils;
 
+import org.andr36oid.hints.HintBar;
+
 import java.util.List;
 
 public abstract class BaseSetupWizardActivity extends Activity implements NavigationBarListener {
@@ -640,6 +642,8 @@ public abstract class BaseSetupWizardActivity extends Activity implements Naviga
     private void initLayout() {
         if (getLayoutResId() != -1) {
             setContentView(getLayoutResId());
+            // andr36oid: the button hints along the bottom, as in every other screen
+            HintBar.attachDefault(this);
         }
         if (getTitleResId() != -1) {
             final CharSequence headerText = TextUtils.expandTemplate(getText(getTitleResId()));
